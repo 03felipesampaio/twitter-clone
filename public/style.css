@@ -1,0 +1,17 @@
+body {
+    width: 33.333%;
+
+    margin: 15px auto;
+
+    background-color: aqua;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+textarea {
+    width: 100%;
+}
+
+.btn-submit {
+    position: relative;
+}

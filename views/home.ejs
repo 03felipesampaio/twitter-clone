@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Not twitter</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <form action="/" method="post">
+    <textarea name="content" id="" cols="30" rows="5">Post something</textarea>
+    <button class="btn-submit" type="submit">Submit</button>
+  </form>
+
+  <div class="post">
+    <% tweets.forEach(tweet=> { %>
+
+      <h5>
+        <%= tweet.name %>
+        <%= '@' + tweet.author %>
+        <%= new Date(tweet.date).toLocaleString('pt-BR', options) %>
+      </h5>
+
+      <h3>
+        <%= tweet.content %>
+      </h3>
+
+      <h5>
+        <%= "Comments: " + tweet.comments %>
+          <%= "Rts: " + tweet.rt %>
+            <%= "Likes: " + tweet.likes %>
+      </h5>
+      <hr />
+  </div>
+
+  <% }) %>
+
+  <form action="/save" method="POST">
+    <button class="btn-save">Sair</button>
+  </form>
+
+</body>
+
+</html>
