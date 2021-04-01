@@ -1,5 +1,4 @@
 // const twitter = require('./app');
-const { static } = require("express");
 const express = require("express");
 const fs = require("fs");
 
@@ -10,40 +9,56 @@ app.use(express.urlencoded());
 app.use(express.static(__dirname + '/public'));
 
 class Tweet {
-    constructor(id, author, name, content) {
-        this.id = id;
-        this.name = name;
-        this.author = author;
-        this.date = new Date();
-        this.content = content;
+  constructor(id, author, name, content) {
 
-        this.likes = 0;
-        this.rt = 0;
-        this.comments = 0;
+    this.user = {
+      author: author,
+      name: name
     }
+    this.id = id;
+    this.date = new Date();
+    this.content = content;
+
+    this.likes = 0;
+    this.rt = 0;
+    this.comments = 0;
+  }
+
+  get time() {
+    const options = { month: 'long', day: 'numeric' };
+    return (new Date(this.date)).toLocaleString('en-US', options)
+  }
 }
 
 let db = JSON.parse(fs.readFileSync('defaultTweets.json'));
 
 let user = {
   author: 'user123',
-  name: 'USER'
+  name: 'Guest'
 }
 
 app.get("/", (req, res) => {
-  let options = {weekday: 'long', month: 'long', day: 'numeric'};
-
-  res.render("home", { tweets: db.tweets.slice().reverse(), options: options});
+  res.render("home", { tweets: db.tweets.slice().reverse()});
 });
 
 app.post("/", (req, res) => {
   let body = req.body;
-  
+
   // Create a new post and add to the list
   let tweet = new Tweet(db.id++, user.author, user.name, body.content);
   db.tweets.push(tweet);
 
   res.redirect("/");
+});
+
+app.get("/user/:userID", (req, res) => {
+  const userID = req.params.userID;
+
+  const userTweets = db.tweets.filter(twt => twt.user.author === userID);
+
+  let profile = userTweets[0].user;
+
+  res.render('user', {user: profile, tweets: userTweets});
 });
 
 app.post("/save", (req, res) => {

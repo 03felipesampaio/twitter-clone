@@ -6,31 +6,28 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+  <title>
+    <%= user.name %> Page
+  </title>
+
+  <!-- CDNs -->
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- Font awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-  <title>Not twitter</title>
+  
+  <!-- Personal CSS -->
   <link rel="stylesheet" href="style.css">
+
+  
 </head>
 
 <body class="container-fluid bg-dark">
   <div class="tweets-area">
-    <div class="creation">
-      <form action="/" method="post">
-        <textarea name="content" id="" cols="30" rows="5">Post something</textarea>
-        <button class="btn btn-primary mx-auto btn-submit" type="submit">Submit</button>
-      </form>
-    </div>
-
-
     <% tweets.forEach(tweet=> { %>
       <div class="post">
           <!-- <img src="..." alt="..." class="rounded-left"> -->
-          <!-- <div class="d-inline name">
-            
-          </div> -->
           <form style="display: inline;" action="/user/<%=tweet.user.author%>" method="get">
             <input type="submit" value="<%= tweet.user.name %>" name="id">
           </form>
@@ -47,20 +44,22 @@
           <%= tweet.content %>
         </p>
 
+        <!-- Bottom part of a tweet -->
         <div class="row tweet-footer">
-          <div class="col-4 comment"><i class="far fa-comment"></i>
-            <%=' '+tweet.comments %></div>
+          <!-- Comments -->
+          <div class="col-4 comment">
+            <i class="far fa-comment"></i>
+            <%=' '+tweet.comments %>
+          </div>
+          <!-- Retweets -->
           <div class="col-4 rt"><i class="fas fa-retweet"></i><%= ' '+tweet.rt %></div>
+          <!-- Likes -->
           <div class="col-4 like"><i class="far fa-heart"></i><%= ' '+tweet.likes %></div>    
         </div>
       </div>
       <% }) %>
   </div>
 
-
-  <form action="/save" method="POST">
-    <button class="btn-save">Sair</button>
-  </form>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
