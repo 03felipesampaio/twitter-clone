@@ -19,12 +19,25 @@ textarea {
     border: 0;
 }
 
-.post {
+.tweet {
     position: relative;
 
-    padding: 20px 15px 5px 75px ;
+    padding: 10px 15px 5px 10px ;
     height: 200px;
     border: 1px solid rgb(97, 97, 97);
+}
+
+.icon-profile {
+    float: left;
+}
+
+.tweet-body {
+    width: 75%;
+    margin: 5px;
+}
+
+.tweet-header {
+    display: inline-block;
 }
 
 input[type=submit] {

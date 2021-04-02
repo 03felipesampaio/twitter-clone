@@ -5,7 +5,7 @@ const fs = require("fs");
 const app = express();
 
 app.set("view engine", "ejs");
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 
 class Tweet {
