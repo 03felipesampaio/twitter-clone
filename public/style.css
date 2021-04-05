@@ -29,11 +29,13 @@ textarea {
 
 .icon-profile {
     float: left;
+
+    margin-left: 15px;
 }
 
 .tweet-body {
-    width: 75%;
-    margin: 5px;
+    width: 80%;
+    margin-left: 80px;
 }
 
 .tweet-header {
@@ -89,8 +91,15 @@ i {
     background-color: rgba(211, 58, 109, 0.4);
 }
 
-/* .tweet-footer {
+.tweet-footer {
     position: absolute;
+    width: 100%;
 
-    bottom: 0;
-} */
+    bottom: 5px;
+}
+
+.footer-item {
+    display: inline-block;
+
+    width: 30.333%;
+}
