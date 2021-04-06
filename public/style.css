@@ -61,6 +61,10 @@ input[type=submit]:hover {
     font-size: 1rem;
 }
 
+.btn-delete {
+    display: inline-block;
+}
+
 i {
     border: 10px solid transparent;
     border-radius: 50%;

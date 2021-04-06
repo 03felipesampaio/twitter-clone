@@ -1,22 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('templates/header'); -%>
 
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-  <title>Not twitter</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-
-<body class="container-fluid bg-dark">
+  <!-- Tweets Area -->
   <div class="tweets-area">
+    <!-- Create and post tweet -->
     <div class="creation">
       <form action="/" method="post">
         <textarea name="content" id="" cols="30" rows="5">Post something</textarea>
@@ -24,7 +10,7 @@
       </form>
     </div>
 
-
+    <!-- Print all tweets avaliable -->
     <% tweets.forEach(tweet=> { %>
       <div class="tweet">
         <!-- Profile Image   -->
@@ -34,28 +20,40 @@
           <!-- Tweet header -->
           <div class="tweet-header">
             <form style="display: inline;" action="/users/<%=tweet.author%>" method="get">
+              <!-- Name -->
               <input type="submit" value="<%= tweet.name %>" name="id">
             </form>
             <div class="d-inline small">
-              <div class="d-inline author"><%= '@' + tweet.author %></div>
+              <!-- User @ -->
+              <div class="d-inline author">
+                <%= '@' + tweet.author %>
+              </div>
+              <!-- Timestamp -->
               <!-- <div class="d-inline">- <%= tweet.date %></div> -->
             </div>
+
+            <form action=<%= '/delete/'+tweet.id %>  method="post">
+              <button class="btn-delete ml-auto" type="submit">Apagar</button>
+            </form>
           </div>
 
+          <!-- Tweet content -->
           <p class="tweet-content">
             <%= tweet.content %>
           </p>
 
-          <form action="/tweet/<%= tweet.tweet_id %> " method="post">
-            <input type="hidden" name="_method" value="PUT">
-            <!-- <input type="submit"> -->
-            <div class="tweet-footer">
-              <div class="footer-item comment"><i class="far fa-comment"></i>
-                <%=' '+tweet.cmnts %></div>
-              <div class="footer-item rt"><i class="fas fa-retweet"></i><%= ' '+tweet.rts %></div>
-              <div class="footer-item like"><i class="far fa-heart"></i><%= ' '+tweet.likes %></div>    
+          <!-- Tweet footer -->
+          <div class="tweet-footer">
+            <!-- Comments -->
+            <div class="footer-item comment"><i class="far fa-comment"></i>
+              <%=' '+tweet.cmmnts %></div>
+              <!-- Retweets -->
+            <div class="footer-item rt"><i class="fas fa-retweet"></i><%= ' '+tweet.rts %></div>
+            <!-- Likes -->
+            <div class="footer-item like">
+                  <i class="far fa-heart"></i><%= ' '+tweet.likes %>
             </div>
-          </form>
+          </div>
           
         </div>
       </div>
@@ -63,20 +61,4 @@
       <% }) %>
   </div>
 
-
-  <form action="/save" method="POST">
-    <button class="btn-save">Sair</button>
-  </form>
-
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
-</body>
-
-</html>
+<%- include('templates/footer'); -%>
