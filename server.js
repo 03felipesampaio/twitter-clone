@@ -7,6 +7,7 @@ const app = express();
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
+app.use('/scripts', express.static(__dirname + '/public'));
 
 const user = {
   id: 'guest123'
@@ -104,9 +105,10 @@ app.post('/tweets/:id/like', (req, res) => {
 
 // Retweet
 app.post('/tweets/:id/rt', (req, res) => {
-  let command_ = `UPDATE $1 SET $2 = $3 + 1 WHERE $4 = $5`;
-  let params = ['tweets', 'rts', 'rts', 'id', req.params.id];
+  let command_ = `UPDATE tweets SET rts = rts + 1 WHERE id = $1`;
+  let params = [req.params.id];
 
+  console.log('Ola');
   // *** LEMBRAR DE FAZER UMA TRANSACAO RT -> ADD RT TABLE ***
   db.query(command_, params, (err, response) => {
     if (err) {
@@ -121,7 +123,7 @@ app.post('/tweets/:id/rt', (req, res) => {
   params = [req.params.id, user.id];
 
   // *** LEMBRAR DE FAZER UMA TRANSACAO RT -> ADD RT TABLE ***
-  db.query(command, params, (err, response) => {
+  db.query(command_, params, (err, response) => {
     if (err) {
       console.error(err);
       return err;

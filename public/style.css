@@ -1,3 +1,7 @@
+body {
+    background-color: black;
+}
+
 .tweets-area {
     width: 50%;
 
@@ -70,31 +74,6 @@ i {
     border-radius: 50%;
 }
 
-.comment:hover {
-    color: rgb(0, 68, 255);
-}
-
-.rt:hover {
-    color: rgb(0, 255, 0);
-}
-
-.like:hover {
-    color: rgb(255, 0, 85);
-}
-
-.comment i:hover {
-    border-color: rgba(60, 112, 255, 0.4);
-    background-color: rgba(60, 112, 255, 0.4);
-}
-.rt i:hover {
-    border-color: rgba(64, 212, 64, 0.397);
-    background-color: rgba(64, 212, 64, 0.397);
-}
-.like i:hover {
-    border-color: rgba(211, 58, 109, 0.397);
-    background-color: rgba(211, 58, 109, 0.4);
-}
-
 .tweet-footer {
     position: absolute;
     width: 100%;
@@ -106,4 +85,39 @@ i {
     display: inline-block;
 
     width: 30.333%;
+}
+
+.comment:hover {
+    color: rgb(0, 68, 255);
+}
+
+.comment i:hover {
+    border-color: rgba(60, 112, 255, 0.4);
+    background-color: rgba(60, 112, 255, 0.4);
+}
+
+.rt:hover {
+    color: rgb(0, 255, 0);
+}
+
+.rt i:hover {
+    border-color: rgba(64, 212, 64, 0.397);
+    background-color: rgba(64, 212, 64, 0.397);
+}
+
+.rt-pressed {
+    color: rgb(0, 255, 0);
+}
+
+.like:hover {
+    color: rgb(255, 0, 85);
+}
+
+.like i:hover {
+    border-color: rgba(211, 58, 109, 0.397);
+    background-color: rgba(211, 58, 109, 0.4);
+}
+
+.liked {
+    color: rgb(255, 0, 85);
 }
