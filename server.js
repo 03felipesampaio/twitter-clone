@@ -10,10 +10,40 @@ app.use(express.static(__dirname + '/public'));
 app.use('/scripts', express.static(__dirname + '/public'));
 
 const user = {
-  id: 'guest123'
+  id: undefined
 }
 
-// Home page
+// *** Login page ***
+app.get("/login", (req, res) => {
+
+  res.render(  "login"  );
+});
+
+app.post('/login', (req, res) => {
+  const USERID = req.body.user;
+  const command = `SELECT * FROM users WHERE user_id = $1`;
+  const params = [USERID];
+
+  db.query(command, params, (err, response) => {
+    if (err) {
+      console.error(err);
+      return err;
+    }
+
+    if(!response.rows.length){
+      const body = req.body;
+      user.id = body.user;
+      db.addUser(body.user, body.name, body.descr);
+    } else {
+      console.log("Achei ", USERID);
+    }
+    
+    res.redirect("/");
+  });
+});
+
+
+// *** Home page ***
 app.get("/", (req, res) => {
   const columns = 'id, author, name, date, content, rts, likes, cmmnts'
   const command = `SELECT ${columns} FROM tweets inner join users on author = user_id`;
@@ -26,10 +56,6 @@ app.get("/", (req, res) => {
     res.render("home", { tweets: tweets.slice().reverse()});
   });
 });
-
-app.get('/teste', (req, res) => {
-  res.render('teste');
-})
 
 app.post("/", (req, res) => {
   // Create a new post and add to the list
@@ -46,11 +72,12 @@ app.post("/", (req, res) => {
   });
 });
 
+// *** USERS PAGE ***
+
 // Get a users page
 app.get("/users/:userID", (req, res) => {
   // Create a new post and add to the list
-  const rows = 'id, author, name, date, content, rts, likes, cmmnts';
-  const command = `SELECT ${rows} FROM tweets inner join users on author = $1`;
+  const command = `SELECT * FROM tweets INNER JOIN users ON author = user_id WHERE author = $1`;
   const params = [req.params.userID];
 
   db.query(command, params, (err, response) => {
@@ -60,10 +87,13 @@ app.get("/users/:userID", (req, res) => {
     }
 
     const tweets = response.rows;
+    const author = {
+      user : tweets[0].author,
+      name : tweets[0].name, 
+      descr: tweets[0].descr 
+    };
 
-    // console.log(tweets[0].likes);
-
-    res.render('user', {tweets: tweets });
+    res.render('user', {author: author, tweets: tweets.slice().reverse() });
   });
 });
 

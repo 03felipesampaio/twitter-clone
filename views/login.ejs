@@ -1,0 +1,20 @@
+<%- include("templates/header") -%> 
+
+<form action="/login" method="post">
+
+
+    <label for="username-login">Digite um usuário</label>
+    <input type="text" name="user" id="username-login" autocomplete="off">
+
+    <label for="name-login">Digite um nome</label>
+    <input type="text" name="name" id="name-login" autocomplete="off">
+
+    <label for="descr-login">Digite uma descrição</label>
+    <input type="text" name="descr" id="descr-login" autocomplete="off">
+
+
+    <button class="btn btn-primary" type="submit">ENTRAR</button>
+    
+</form>
+
+<%- include("templates/footer") -%> 

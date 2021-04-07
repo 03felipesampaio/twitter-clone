@@ -1,6 +1,14 @@
 body {
     background-color: black;
+
+    color: white;
 }
+
+
+
+/* *** LOGIN PAGE *** */
+
+
 
 .tweets-area {
     width: 50%;
@@ -17,7 +25,7 @@ body {
 textarea {
     width: 100%;
 
-    background-color: black;
+    background-color: rgb(46, 45, 45);
     color: white;
 
     border: 0;
@@ -120,4 +128,40 @@ i {
 
 .liked {
     color: rgb(255, 0, 85);
+}
+
+
+/* *** USER PAGE *** */
+.user-profile {
+    border: solid 1px #ccc;
+    padding: 15px;
+
+    width: 300px;
+    height: 500px;
+    float: left;
+
+    color: white;
+}
+
+#profile-pic {
+    width: 150px;
+
+    margin: 0 60px 15px;
+}
+
+
+#name {
+    display: inline;
+
+}
+
+#user {
+    display: inline;
+
+    color: gray;
+
+}
+
+#description {
+    margin-bottom: 10px;
 }
