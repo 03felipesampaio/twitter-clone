@@ -82,6 +82,10 @@ i {
     border-radius: 50%;
 }
 
+.form-btn {
+    display: inline-block;
+}
+
 .tweet-footer {
     position: absolute;
     width: 100%;
@@ -89,10 +93,12 @@ i {
     bottom: 5px;
 }
 
+.form-btn {
+    display: inline-block;
+}
+
 .footer-item {
     display: inline-block;
-
-    width: 30.333%;
 }
 
 .comment:hover {
