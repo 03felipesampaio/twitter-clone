@@ -1,0 +1,48 @@
+<%- include( 'templates/header' ); -%>
+
+<div class="tweet">
+    <div class="tweet-header">
+        <img src="/imgs/profile-icon.png" alt="">
+        <h5><%= author.name %> <em>@<%= author.id %></em></h5>
+    </div>
+
+    <p><%= tweet.content %> </p>
+
+    <!-- Tweet footer -->
+    <div class="tweet-footer">
+
+        <!-- Comments -->
+        <div class="footer-item comment">
+          <i class="far fa-comment"></i>
+          <%=' '+tweet.cmmnts %>
+        </div>
+        
+        <!-- Retweets -->
+        <form action="<%= '/tweets/' + tweet.id + '/rt' %>" method="POST" class="form-btn">
+          <div class="footer-item rt">
+            <input type="submit" value="">
+            <button type="submit">
+              <i class="fas fa-retweet"></i>
+              <%= ' ' +tweet.rts %>
+            </button>
+            
+          </div>
+        </form>
+
+
+        <!-- Likes -->
+        <form action="<%= '/tweets/' + tweet.id + '/like'%>" method="POST" class="form-btn">
+          <div class="footer-item like">
+            <button type="submit">
+              <i class="far fa-heart"></i>
+            <%= ' ' + tweet.likes %>
+            </button>
+            
+          </div>
+        </form>
+
+      </div>
+</div>
+
+
+<%- include( 'templates/footer' ); -%>

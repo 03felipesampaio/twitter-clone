@@ -17,37 +17,43 @@
     <% tweets.forEach(tweet=> { %>
 
       <div class="tweet">
-        <!-- Profile Image   -->
-        <img src="imgs/profile-icon.png" alt="Default twitter icon" class="rounded-circle icon-profile">
 
-        <div class="tweet-body">
+        <!-- Tweet header -->
+        <div class="tweet-header">
 
-          <!-- Tweet header -->
-          <div class="tweet-header">
+          <!-- Profile Image   -->
+          <img src="imgs/profile-icon.png" alt="Default twitter icon" 
+            class="rounded-circle icon-profile">
 
-            <form style="display: inline;" action="/users/<%=tweet.author%>" method="get">
-              <!-- Name -->
-              <input type="submit" value="<%= tweet.name %>" name="id">
-            </form>
+          <!-- Go to user page -->
+          <form action="/users/<%=tweet.author%>" method="get">
+            
+            <!-- Name -->
+            <input id="<%= tweet.id %>" class="tweet-username"
+                type="submit" value="<%= tweet.name %>" name="id">
+          
+          </form>
 
-            <div class="d-inline small">
+          <div class="d-inline small">
 
-              <!-- User @ -->
-              <div class="d-inline author">
-                <%= '@' + tweet.author %>
-              </div>
-
-              <!-- Timestamp -->
-              <!-- <div class="d-inline">- <%= tweet.date %></div> -->
-
+            <!-- User @ -->
+            <div class="d-inline author">
+              <label class="label-user" for="<%= tweet.id %>"><%= '@' + tweet.author %></label>
             </div>
 
-            <form action=<%='/delete/' +tweet.id %> method="post">
+            <!-- Timestamp -->
+            <!-- <div class="d-inline">- <%= tweet.date %></div> -->
 
-              <button class="btn-delete ml-auto" type="submit">Apagar</button>
-
-            </form>
           </div>
+
+          <!-- <form action=<%='/delete/' +tweet.id %> method="post">
+
+            <button class="btn-delete" type="submit">Apagar</button>
+
+          </form> -->
+        </div>
+
+        <div class="tweet-body">
 
           <!-- Tweet content -->
           <p class="tweet-content">
@@ -64,28 +70,27 @@
             </div>
             
             <!-- Retweets -->
+            <div class="footer-item rt">
             <form action="<%= '/tweets/' + tweet.id + '/rt' %>" method="POST" class="form-btn">
-              <div class="footer-item rt">
-                <input type="submit" value="">
                 <button type="submit">
                   <i class="fas fa-retweet"></i>
                   <%= ' ' +tweet.rts %>
                 </button>
                 
-              </div>
-            </form>
+              </form>
+            </div>
 
 
             <!-- Likes -->
+            <div class="footer-item like">
             <form action="<%= '/tweets/' + tweet.id + '/like'%>" method="POST" class="form-btn">
-              <div class="footer-item like">
                 <button type="submit">
                   <i class="far fa-heart"></i>
                 <%= ' ' + tweet.likes %>
                 </button>
                 
-              </div>
-            </form>
+              </form>
+            </div>
 
           </div>
         </div>

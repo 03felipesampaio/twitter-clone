@@ -1,0 +1,132 @@
+/* *** Tweets structure *** */
+
+.tweet {
+    position: relative;
+
+    padding: 10px 15px 5px;
+    height: 200px;
+    border: 1px solid rgb(226, 226, 226);
+    
+    margin-top: -1px;
+}
+
+.tweet-header {
+    width: 100%;
+
+
+}
+
+.tweet-username {
+    font-weight: bold;
+    padding: auto 1px;
+}
+
+.tweet-username:hover {
+    text-decoration: underline;
+}
+
+.label-user {
+    display: inline;
+}
+
+.author {
+    font-size: 1rem;
+}
+
+.icon-profile {
+    display: inline;
+
+    /* margin-left: 15px; */
+}
+
+.tweet-username {
+    display: inline;
+    border: white;
+    background-color: white;
+
+    width: fit-content;
+}
+
+.tweet-content {
+    margin-top: 10px;
+    margin-left: 60px;
+}
+
+.tweet-footer {
+    position: absolute;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    bottom: 0;
+    width: 100%;
+    padding: auto 5%;
+}
+
+.footer-item {
+    display: inline-block;
+    
+
+    flex-grow: 1;
+}
+
+.footer-item button {
+    border: none;
+    background-color: white;
+}
+
+i {
+    border: 10px solid transparent;
+    border-radius: 50%;
+}
+
+.form-btn {
+    display: inline-block;
+}
+
+.tweet-footer {
+    position: absolute;
+    width: 100%;
+
+    bottom: 5px;
+}
+
+.form-btn {
+    display: inline-block;
+}
+
+.comment:hover {
+    color: rgb(0, 68, 255);
+}
+
+.comment i:hover {
+    border-color: rgba(60, 112, 255, 0.4);
+    background-color: rgba(60, 112, 255, 0.4);
+}
+
+.rt:hover {
+    color: rgb(0, 255, 0);
+}
+
+.rt i:hover {
+    border-color: rgba(64, 212, 64, 0.397);
+    background-color: rgba(64, 212, 64, 0.397);
+}
+
+.rt-pressed {
+    color: rgb(0, 255, 0);
+}
+
+.like:hover {
+    color: rgb(255, 0, 85);
+}
+
+.like i:hover {
+    border-color: rgba(211, 58, 109, 0.397);
+    background-color: rgba(211, 58, 109, 0.4);
+}
+
+.liked {
+    color: rgb(255, 0, 85);
+}

@@ -1,20 +1,43 @@
 <%- include("templates/header") -%> 
 
-<form action="/login" method="post">
+<h1 class="login-header">Esse não é o twitter</h1>
 
-
-    <label for="username-login">Digite um usuário</label>
-    <input type="text" name="user" id="username-login" autocomplete="off">
-
-    <label for="name-login">Digite um nome</label>
-    <input type="text" name="name" id="name-login" autocomplete="off">
-
-    <label for="descr-login">Digite uma descrição</label>
-    <input type="text" name="descr" id="descr-login" autocomplete="off">
-
-
-    <button class="btn btn-primary" type="submit">ENTRAR</button>
+<div style="display: grid;" class="cards">
     
-</form>
+    <div class="card create-user">
+
+        <h2 class="login-card-title">Criar conta ou...</h2>
+
+        <form action="/login/create" method="POST">
+            <% if (message) { %>
+              <small><%= message.user  %></small>
+            <% } %>
+
+            <label for="username-create">User</label>
+            <input id="username-create" type="text" name="user">
+
+            <label for="name-create">Nome</label>
+            <input id="name-create"     type="text" name="name">
+
+            <label for="about-create">Descrição</label>
+            <input id="about-create"    type="text" name="descr">
+
+            <button type="submit" class="btn btn-primary login-btn">Criar</button>
+        </form>
+    </div>
+
+    <div class="card login">
+        
+        <h2 class="login-card-title">Entrar</h2>
+
+        <form action="/login/enter" method="POST">
+            <label for="username-login">User</label>
+            <input id="username-login" type="text" name="user">
+
+            <button type="submit" class="btn btn-primary login-btn">Entrar</button>
+        </form>
+    </div>
+
+</div>
 
 <%- include("templates/footer") -%> 

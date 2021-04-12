@@ -1,0 +1,122 @@
+body {
+    color: rgb(61, 61, 61);
+}
+
+form {
+    display: inline;
+}
+
+
+
+/* *** LOGIN PAGE *** */
+/* body {
+    padding: 15px;
+} */
+
+.login-header, .login-card-title {
+    text-align: center;
+    color: rgb(0, 140, 255);
+}
+
+.login-card-title {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+}
+
+input {
+    display: block;
+    margin-bottom: 15px;
+}
+
+.login-btn {
+    margin-top: 10px;
+    position: absolute;
+
+    width: 80px;
+
+    bottom: 10px;
+    right: 10px;
+}
+
+.cards {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 400px;
+    width: 90%;
+    margin: auto;
+
+    justify-content: center;
+}
+
+.card {
+    margin: 5px;
+    padding: 30px 20%;
+
+    position: relative;
+
+    border: none;
+}
+
+#about-create {
+    height: 160px;
+}
+
+
+
+/* *** Home *** */
+
+
+
+.tweets-area {
+    width: 50%;
+
+    margin: 15px auto;
+}
+
+.creation {
+    margin: 20px auto;
+}
+
+textarea {
+    width: 100%;
+
+    background-color: rgb(46, 45, 45);
+    color: white;
+
+    border: 0;
+}
+
+/* *** USER PAGE *** */
+.user-profile {
+    width: 50%;
+    margin: 10px auto;
+    
+    border: solid 1px rgb(226, 226, 226);
+    padding-top: 20px;
+    padding-left: 60px;
+}
+
+#profile-pic {
+    width: 130px;
+
+    margin-bottom: 15px;
+}
+
+
+#name {
+    /* display: inline; */
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+#user {
+    color: gray;
+    font-size: 1.2rem;
+
+}
+
+#description {
+    margin: 10px auto;
+}

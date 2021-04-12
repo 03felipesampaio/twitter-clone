@@ -1,5 +1,4 @@
 const express = require("express");
-const { toggleLike } = require("./src/database");
 
 const db = require('./src/database');
 
@@ -17,14 +16,45 @@ const user = {
 // *** Login page ***
 app.get("/login", (req, res) => {
 
-  res.render(  "login"  );
+  res.render("login", {message: null});
 });
 
 // Create a new user
-app.post('/login', (req, res) => {
-  const USERID = req.body.user;
+app.post('/login/create', (req, res) => {
+  const userID = req.body.user;
   const command = `SELECT * FROM users WHERE user_id = $1`;
-  const params = [USERID];
+  const params = [userID];
+
+  db.query(command, params, (err, response) => {
+    if (err) {
+      console.error(err);
+      return err;
+    }
+
+    if(!response.rows.length){
+      
+      const body = req.body;
+      user.id = body.user;
+      db.addUser(body.user, body.name, body.descr);
+      res.redirect("/");
+
+    } else {
+
+      console.log("Achei ", userID);
+
+      res.redirect('/login', {message: {
+          user : 'User ja está em uso'
+        }
+      });
+    }
+
+  });
+});
+
+app.post('/login/enter', (req, res) => {
+  const userID = req.body.user;
+  const command = `SELECT * FROM users WHERE user_id = $1`;
+  const params = [userID];
 
   db.query(command, params, (err, response) => {
     if (err) {
@@ -34,14 +64,22 @@ app.post('/login', (req, res) => {
 
     if(!response.rows.length){
       const body = req.body;
-      user.id = body.user;
+      const foundUser = response.rows[0].author
+      user.id = foundUser;
       db.addUser(body.user, body.name, body.descr);
+      res.redirect("/");
+
     } else {
-      console.log("Achei ", USERID);
+
+      console.log("Nao achei", userID);
+
+      res.redirect('/login', {message: {
+          user : 'User ja está em uso'
+        }
+      });
     }
-    
-    res.redirect("/");
-  });
+
+  })
 });
 
 
@@ -92,33 +130,8 @@ app.post('/tweets/:id/like', (req, res) => {
 
 // Retweet
 app.post('/tweets/:id/rt', (req, res) => {
-  let command_ = `UPDATE tweets SET rts = rts + 1 WHERE id = $1`;
-  let params = [req.params.id];
-
-  db.query(command_, params, (err, response) => {
-    if (err) {
-      console.error(err);
-      return err;
-    }
-
-    console.log('RT');
-  });
-
-  command_ = `INSERT INTO retweets(tweet_id, author) VALUES($1, $2)`;
-  params = [req.params.id, user.id];
-
-  // *** LEMBRAR DE FAZER UMA TRANSACAO RT -> ADD RT TABLE ***
-  db.query(command_, params, (err, response) => {
-    if (err) {
-      console.error(err);
-      return err;
-    }
-
-    console.log('RT SALVO');
-    res.status(200).send({message: 'RT adicionado com sucesso'});
-  });
-
-
+  db.toggleRT(user.id, req.params.id);
+  res.redirect('/');
 });
 
 // Delete a tweet
@@ -150,9 +163,7 @@ app.get("/tweets/:id", (req, res) => {
 
     const tweet = response.rows;
 
-    // console.log(tweets[0].likes);
-
-    res.send(tweet);
+    res.render('tweet', { author: { id:'teste123', name:'oi' }, tweet:response.rows[0] } );
   });
 });
 
@@ -160,7 +171,6 @@ app.get("/tweets/:id", (req, res) => {
 
 // Get a users page
 app.get("/users/:userID", (req, res) => {
-  // Create a new post and add to the list
   const command = `SELECT * FROM tweets INNER JOIN users ON author = user_id WHERE author = $1`;
   const params = [req.params.userID];
 
